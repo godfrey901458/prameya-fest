@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open admin.html",
+            "url": "http://localhost:3000/admin.html",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Start server and open admin.html",
+            "program": "${workspaceFolder}/server.js",
+            "serverReadyAction": {
+                "pattern": "running at http://localhost:([0-9]+)",
+                "uriFormat": "http://localhost:%s/admin.html",
+                "action": "debugWithChrome"
+            }
+        }
+    ]
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | PRAMEYA 1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="ambient ambient-one"></div>
+<div class="ambient ambient-two"></div>
+
+<nav class="nav">
+  <a class="brand" href="index.html"><span class="brand-mark">P<span>✦</span></span><span>PRAMEYA <small>1.0 / IT BATTLE</small></span></a>
+  <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="events.html">Competitions</a>
+    <a href="scorecard.html">Score Card</a>
+    <a href="about.html">About</a>
+    <a class="nav-cta active" href="register.html">Register <span>↗</span></a>
+  </div>
+</nav>
+
+<main class="wrap inner-page register-layout">
+  <div class="register-intro">
+    <div class="eyebrow">REGISTRATION PORTAL / 004</div>
+    <h1 class="page-title">Your next move<br>starts <span class="gradient-text">here.</span></h1>
+    <p class="page-intro">Enter your team name and college, then add the details of each member. All events allow up to 2 members, while IT Manager and Reel Making are individual events.</p>
+    <div class="register-info">
+      <div><span class="info-symbol">⌁</span><div><b>One form per competition</b><p>Submit a separate registration for each competition you want to enter.</p></div></div>
+      <div><span class="info-symbol">1×</span><div><b>One entry per team</b><p>A team can register only once for the same event. Repeat entries are rejected.</p></div></div>
+      <div><span class="info-symbol">ID</span><div><b>Keep your college ID ready</b><p>Participants should bring a valid ID card on the event day.</p></div></div>
+      <div><span class="info-symbol">✓</span><div><b>Review before submitting</b><p>Your registration is saved to the event database when you submit the form.</p></div></div>
+    </div>
+  </div>
+
+  <form class="form-panel" id="registrationForm">
+    <div class="form-heading">
+      <span class="eyebrow">TEAM REGISTRATION</span>
+      <span class="step-count">MAX 2 MEMBERS</span>
+    </div>
+
+    <div class="form-grid">
+      <div class="full-field selected-event">
+        <span class="event-field-label">Competition</span>
+        <div class="selected-event-value" id="selectedEventName">—</div>
+      </div>
+
+      <label class="full-field" id="teamNameLabel">Team name <span id="teamNameRequiredMark">*</span>
+        <input name="teamName" id="teamName" placeholder="Your team name">
+      </label>
+
+      <label class="full-field">College name <span>*</span>
+        <input name="collegeName" id="collegeName" required placeholder="Your college / institution">
+      </label>
+    </div>
+
+    <div class="members-heading">Member Details</div>
+    <div id="membersContainer"></div>
+
+    <button type="button" class="btn btn-ghost add-member-btn" id="addMemberBtn">+ Add member</button>
+    <div class="success-box" id="registrationClosed" hidden aria-live="polite"><span class="success-mark">!</span><div><b>Registration is closed</b><p>The organizers have paused new entries for every event. Please check back later.</p></div></div>
+    <button class="btn btn-primary submit-btn" type="submit">Submit Registration</button>
+
+    <p class="form-note">IT Manager and Reel Making are individual events (1 member only). All other events allow up to 2 members.</p>
+    <div class="success-box" id="successBox" hidden aria-live="polite"></div>
+  </form>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">P<span>✦</span></span><span>PRAMEYA <small>1.0 / IT BATTLE</small></span></a>
+    <p>Shree Devi Institute of Technology · MCA Department</p>
+    <span>TECHNICAL CLUB — MEDHA © 2026</span>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Secure Console | PRAMEYA 1.0</title><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css"></head><body><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><nav class="nav"><a class="brand" href="index.html"><span class="brand-mark">P<span>✦</span></span><span>PRAMEYA <small>1.0 / IT BATTLE</small></span></a><button class="menu-toggle" aria-label="Toggle menu">☰</button><div class="nav-links"><a href="index.html">Home</a><a href="events.html">Competitions</a><a href="scorecard.html">Score Card</a><a href="about.html">About</a><a href="#uploadedResults" class="nav-results-link">Uploaded Results</a></div></nav><main class="wrap inner-page">
+<div id="consoleRoot">
+<div class="eyebrow">SECURE CONSOLE / ORGANIZERS &amp; COORDINATORS</div>
+<h1 class="page-title">Console <span class="gradient-text">control.</span></h1>
+<p class="page-intro">Sign in with your organizer or coordinator credentials. Organizers see every competition and upload results, and manage coordinator accounts on the Coordinators page; event coordinators see their own event and upload its results.</p>
+<section class="form-panel" id="adminLoginPanel">
+  <div class="form-heading"><span class="eyebrow">CONSOLE LOGIN</span><span class="step-count">SECURE</span></div>
+  <form id="adminLoginForm">
+    <div class="form-grid">
+      <label class="full-field">Username / Coordinator ID <span>*</span><input name="username" required autocomplete="username" placeholder="Organizer or coordinator ID"></label>
+      <label class="full-field">Password <span>*</span><input name="password" type="password" required autocomplete="current-password" placeholder="Your password"></label>
+    </div>
+    <button class="btn btn-primary submit-btn" type="submit">Log in <span>↗</span></button>
+    <p class="form-note">Organizers create the organizer account with <code>npm run create-admin</code>; coordinator IDs are issued from the organizer dashboard. Your role decides which console opens.</p>
+    <p id="adminLoginMessage" class="form-note" hidden aria-live="polite"></p>
+  </form>
+</section>
+<section id="adminDashboard" hidden>
+  <div class="admin-toolbar"><div class="admin-stats"><div class="stat-box"><span>TOTAL ENTRIES</span><b id="totalCount">0</b></div><div class="stat-box"><span>COMPETITIONS</span><b>06</b></div></div>
+  <div class="admin-actions"><select id="filterEvent"><option value="">All competitions</option><option>Coding</option><option>Web Designing</option><option>Pitch Tank</option><option>IT Quiz</option><option>IT Manager</option><option>Reel Making</option></select><a class="btn btn-ghost" href="coordinators.html">Coordinators ↗</a><button class="btn btn-ghost" id="exportCsv">Export CSV ↓</button><button class="btn btn-ghost" id="adminLogout">Log out</button></div></div>
+  <section class="form-panel" id="registrationLockPanel" style="margin-bottom:26px;">
+    <div class="form-heading"><span class="eyebrow">REGISTRATION WINDOW</span><span class="step-count" id="lockState">—</span></div>
+    <p class="form-note" id="lockNote">Close new entries for every event, or open them again. Entries already registered are kept.</p>
+    <button class="btn btn-ghost" id="toggleRegistrationLock" type="button">Lock registration</button>
+    <p class="form-note" id="lockMessage" hidden aria-live="polite"></p>
+  </section>
+  <div class="table-wrap"><table class="registrations-table"><thead><tr><th>S.NO</th><th>REG ID</th><th>PARTICIPANT</th><th>COLLEGE</th><th>COMPETITION</th><th>MEMBER NAME</th><th>CONTACT NUMBER</th><th>ACTION</th></tr></thead><tbody id="registrationRows"><tr><td colspan="8" class="empty-state">Loading registrations…</td></tr></tbody></table></div>
+  <section class="form-panel" id="uploadedResults" style="margin-top:30px;scroll-margin-top:100px;">
+    <div class="form-heading"><span class="eyebrow">UPLOADED RESULT</span><div class="heading-actions"><span class="step-count" id="resultSummary">—</span><button class="btn btn-ghost" id="exportResultsPdf" type="button">Export PDF ↓</button></div></div>
+    <div class="table-wrap" style="margin-top:6px;"><table class="registrations-table"><thead><tr><th>S.NO</th><th>EVENT</th><th>STATUS</th><th>WINNER</th><th>RUNNER-UP</th><th>UPLOADED</th></tr></thead><tbody id="resultRows"><tr><td colspan="6" class="empty-state">Loading results…</td></tr></tbody></table></div>
+    <p class="form-note" id="resultNote">Export the current winner and runner-up for every event as a PDF.</p>
+  </section>
+</section>
+<section id="coordinatorDashboard" hidden>
+  <div class="admin-toolbar"><div class="admin-stats"><div class="stat-box"><span>EVENT</span><b id="coordinatorEvent">—</b></div><div class="stat-box"><span>TOTAL ENTRIES</span><b id="coordinatorTotalCount">0</b></div></div>
+  <div class="admin-actions"><button class="btn btn-ghost" id="coordinatorLogout">Log out</button></div></div>
+  <div class="console-tabs" role="tablist" aria-label="Coordinator sections">
+    <button type="button" class="console-tab active" role="tab" id="tabStudents" aria-controls="studentsPanel" aria-selected="true" data-panel="students">Registered Students</button>
+    <button type="button" class="console-tab" role="tab" id="tabRounds" aria-controls="roundsPanel" aria-selected="false" data-panel="rounds">Rounds</button>
+  </div>
+  <section class="console-panel" id="studentsPanel" role="tabpanel" aria-labelledby="tabStudents">
+    <div class="form-heading"><span class="eyebrow">REGISTERED STUDENTS</span><div class="heading-actions"><span class="step-count">EXPORT THE ENTRY LIST</span><button class="btn btn-ghost" id="exportStudentsPdf" type="button">Export PDF ↓</button></div></div>
+    <div class="table-wrap"><table class="registrations-table"><thead><tr><th>S.NO</th><th>REG ID</th><th>PARTICIPANT</th><th>COLLEGE</th><th>MEMBER NAME</th><th>CONTACT NUMBER</th></tr></thead><tbody id="coordinatorRows"><tr><td colspan="6" class="empty-state">Loading registrations…</td></tr></tbody></table></div>
+  </section>
+  <section class="console-panel" id="roundsPanel" role="tabpanel" aria-labelledby="tabRounds" hidden>
+    <div class="round-tabs" id="roundTabs">
+      <button type="button" class="round-tab active" data-round="1">Round 1</button>
+      <button type="button" class="round-tab" data-round="2">Round 2</button>
+      <button type="button" class="round-tab" data-round="3">Round 3</button>
+    </div>
+    <section class="form-panel" style="margin-top:18px;">
+      <div class="form-heading">
+        <span class="eyebrow" id="roundTitle">ROUND 1</span>
+        <span class="step-count">TEAMS: <b id="roundsTeamCount">0</b> · <span id="roundHint">Enter marks, then submit</span></span>
+      </div>
+      <div class="round-banner" id="roundBanner" hidden>
+        <div class="round-podium">
+          <div><span>WINNER</span><b id="winnerName">—</b></div>
+          <div><span>RUNNER-UP</span><b id="runnerName">—</b></div>
+        </div>
+      </div>
+      <div class="table-wrap"><table class="registrations-table" id="roundTable"><thead><tr><th>S.NO</th><th>TEAM &amp; MEMBERS</th><th>MARKS</th><th id="qualifyHeader" hidden>QUALIFY</th><th>ACTION</th></tr></thead><tbody id="roundRows"><tr><td colspan="4" class="empty-state">Loading round…</td></tr></tbody></table></div>
+      <div class="round-actions">
+        <button class="btn btn-primary" id="submitMarks" type="button">Submit marks</button>
+        <button class="btn btn-ghost" id="saveQualifiers" type="button" hidden>Save qualifiers</button>
+      </div>
+      <p class="form-note" id="roundMessage" hidden aria-live="polite"></p>
+    </section>
+  </section>
+</section>
+</div>
+<div class="rules-strip"><span class="rules-icon">!</span><div><h3>Organizer note</h3><p>Use a strong password and keep your <code>.env</code> file private. Do not deploy the website publicly until HTTPS and production environment settings are configured.</p></div></div>
+</main><footer class="footer"><div class="wrap footer-inner"><a class="brand" href="index.html"><span class="brand-mark">P<span>✦</span></span><span>PRAMEYA <small>1.0 / IT BATTLE</small></span></a><p>Organizer &amp; coordinator console · Demo only</p><span>TECHNICAL CLUB — MEDHA © 2026</span></div></footer><script src="assets/app.js"></script></body></html>

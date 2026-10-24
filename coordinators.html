@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Coordinator Accounts | PRAMEYA 1.0</title><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css"></head><body><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><nav class="nav"><a class="brand" href="index.html"><span class="brand-mark">P<span>✦</span></span><span>PRAMEYA <small>1.0 / IT BATTLE</small></span></a><button class="menu-toggle" aria-label="Toggle menu">☰</button><div class="nav-links"><a href="index.html">Home</a><a href="events.html">Competitions</a><a href="scorecard.html">Score Card</a><a href="about.html">About</a><a href="admin.html">Console</a></div></nav><main class="wrap inner-page">
+<div id="consoleRoot">
+<div class="eyebrow">SECURE CONSOLE / ORGANIZER</div>
+<h1 class="page-title">Coordinator <span class="gradient-text">accounts.</span></h1>
+<p class="page-intro">Create and remove event coordinator logins. Each coordinator gets a unique ID and password, signs in on the console page, and only sees their own event.</p>
+<section class="form-panel" id="adminLoginPanel">
+  <div class="form-heading"><span class="eyebrow">CONSOLE LOGIN</span><span class="step-count">SECURE</span></div>
+  <form id="adminLoginForm">
+    <div class="form-grid">
+      <label class="full-field">Username / Coordinator ID <span>*</span><input name="username" required autocomplete="username" placeholder="Organizer or coordinator ID"></label>
+      <label class="full-field">Password <span>*</span><input name="password" type="password" required autocomplete="current-password" placeholder="Your password"></label>
+    </div>
+    <button class="btn btn-primary submit-btn" type="submit">Log in <span>↗</span></button>
+    <p class="form-note">Only organizers can open this page. Sign in with your organizer account to manage coordinator logins.</p>
+    <p id="adminLoginMessage" class="form-note" hidden aria-live="polite"></p>
+  </form>
+</section>
+<section id="adminDashboard" hidden>
+  <div class="admin-toolbar"><div class="admin-stats"><div class="stat-box"><span>COORDINATORS</span><b id="coordinatorCount">0</b></div><div class="stat-box"><span>COMPETITIONS</span><b>06</b></div></div>
+  <div class="admin-actions"><a class="btn btn-ghost" href="admin.html">← Console</a><button class="btn btn-ghost" id="adminLogout">Log out</button></div></div>
+  <section class="form-panel">
+    <div class="form-heading"><span class="eyebrow">EVENT COORDINATORS</span><span class="step-count">NEW ACCOUNT</span></div>
+    <form id="coordinatorForm">
+      <div class="form-grid">
+        <label class="full-field">Coordinator ID <span>*</span><input name="username" required autocomplete="off" placeholder="e.g. coding-coord"></label>
+        <label class="full-field">Password <span>*</span><input name="password" type="password" required autocomplete="new-password" placeholder="At least 8 characters"></label>
+        <label class="full-field">Event <span>*</span><select name="eventName" required><option value="">Select an event</option><option>Coding</option><option>Web Designing</option><option>Pitch Tank</option><option>IT Quiz</option><option>IT Manager</option><option>Reel Making</option></select></label>
+      </div>
+      <button class="btn btn-primary submit-btn" type="submit">Create coordinator <span>↗</span></button>
+      <p class="form-note">Each coordinator gets a unique ID and password and only sees their own event. Coordinators sign in on the console page.</p>
+      <div class="success-box" id="coordinatorFormMessage" hidden aria-live="polite"></div>
+    </form>
+    <div class="table-wrap" style="margin-top:22px;"><table class="registrations-table"><thead><tr><th>COORDINATOR ID</th><th>EVENT</th><th>CREATED</th><th>ACTION</th></tr></thead><tbody id="coordinatorList"><tr><td colspan="4" class="empty-state">Loading coordinators…</td></tr></tbody></table></div>
+  </section>
+</section>
+</div>
+<div class="rules-strip"><span class="rules-icon">!</span><div><h3>Organizer note</h3><p>Issue each coordinator their own ID and password and share it privately. Deleting a coordinator revokes their access immediately.</p></div></div>
+</main><footer class="footer"><div class="wrap footer-inner"><a class="brand" href="index.html"><span class="brand-mark">P<span>✦</span></span><span>PRAMEYA <small>1.0 / IT BATTLE</small></span></a><p>Organizer &amp; coordinator console · Demo only</p><span>TECHNICAL CLUB — MEDHA © 2026</span></div></footer><script src="assets/app.js"></script></body></html>
