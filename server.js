@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const mysql = require('mysql2/promise');
 
 const app = express();
-// Hosts like Render run the app behind a proxy; trust one hop so rate limiting sees the real client IP.
+// Hosts like Render/Vercel run the app behind a proxy; trust one hop so rate limiting sees the real client IP.
 app.set('trust proxy', 1);
 const PORT = Number(process.env.PORT || 3000);
 const SOLO_EVENTS = ['IT Manager', 'Reel Making'];
@@ -29,7 +29,8 @@ const poolConfig = {
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME,
   waitForConnections: true,
-  connectionLimit: 10,
+  // Serverless platforms spin up many instances; keep each pool small so free cloud databases are not overwhelmed.
+  connectionLimit: process.env.VERCEL ? 2 : 10,
   queueLimit: 0,
   charset: 'utf8mb4'
 };
@@ -115,8 +116,8 @@ function requireRole(role) {
 
 // Never expose server-side source, environment files, database scripts, or package metadata.
 // Checks every path segment so nested copies of the project cannot leak the same files.
-const BLOCKED_FILES = new Set(['server.js', 'database.sql', 'package.json', 'package-lock.json', '.env', '.env.example', '.gitignore', 'README.txt']);
-const BLOCKED_DIRS = new Set(['scripts', 'node_modules', '.git', 'PRAMEYA_1.0_Website', ')_Website']);
+const BLOCKED_FILES = new Set(['server.js', 'database.sql', 'package.json', 'package-lock.json', 'vercel.json', '.env', '.env.example', '.gitignore', 'README.txt']);
+const BLOCKED_DIRS = new Set(['scripts', 'node_modules', '.git', '.commandcode', 'PRAMEYA_1.0_Website', ')_Website']);
 app.use((req, res, next) => {
   let pathname;
   try {
@@ -129,6 +130,7 @@ app.use((req, res, next) => {
   const lower = last.toLowerCase();
   const blocked = segments.some(segment => BLOCKED_DIRS.has(segment))
     || BLOCKED_FILES.has(last)
+    || pathname === '/api/index.js'
     || lower.endsWith('.zip')
     || lower.endsWith('.sql');
   if (blocked) {
@@ -882,14 +884,16 @@ app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-async function start() {
-  try {
-    await pool.query('SELECT 1');
-    app.listen(PORT, () => console.log(`PRAMEYA 1.0 running at http://localhost:${PORT}`));
-  } catch (error) {
-    console.error('Database connection failed:', error.message);
-    console.error('Check that MySQL is running and your .env settings match database.sql.');
-    process.exit(1);
-  }
+// Local / traditional hosting: check the database, then listen.
+// On Vercel the file is imported by api/index.js instead, so it must not call listen().
+if (require.main === module) {
+  pool.query('SELECT 1')
+    .then(() => app.listen(PORT, () => console.log(`PRAMEYA 1.0 running at http://localhost:${PORT}`)))
+    .catch((error) => {
+      console.error('Database connection failed:', error.message);
+      console.error('Check that MySQL is running and your .env settings match database.sql.');
+      process.exit(1);
+    });
 }
-start();
+
+module.exports = app;
