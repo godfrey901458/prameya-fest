@@ -1,3 +1,4 @@
+- Wants complete, end-to-end step-by-step instructions with exact commands and copy-pasteable snippets rather than high-level summaries or partial answers (self-describes as a beginner). Confidence: 0.6
 - Prefers avoiding redundant dropdowns for selecting something that's already known from context: clicking a specific event should register directly for that event rather than opening a generic form with a selector. Confidence: 0.8
 - Prefers consolidating related entry flows into a single page rather than separate pages per user role: admin and coordinator logins should share one page with role-based routing to the right dashboard. Confidence: 0.7
 - Expects per-event configuration to drive the UI instead of one shared hardcoded default: events that run fewer rounds must show only their own round tabs (e.g. Pitch Tank and IT Quiz show 2 round tabs, not the default 3). Confidence: 0.7
